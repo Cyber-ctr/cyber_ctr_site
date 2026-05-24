@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section thank-you">
+  <div class="container center-card reveal glass-card">
+    <span class="eyebrow">404</span>
+    <h1>Page not found.</h1>
+    <p>The page you were looking for does not exist.</p>
+    <a class="btn primary" href="{{ url_for('index') }}">Return home</a>
+  </div>
+</section>
+{% endblock %}

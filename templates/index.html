@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero section">
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">Startup-grade software studio</span>
+      <h1>Secure Digital Systems Built for Scale.</h1>
+      <p class="lead">Cyber-ctr designs and builds responsive web applications and digital solutions for startups that need speed, polish, and reliability.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#contact">Start a Project</a>
+        <a class="btn ghost" href="#services">Explore Services</a>
+      </div>
+      <div class="stats">
+        <div><strong>{{ stats.projects }}+</strong><span>Projects shipped</span></div>
+        <div><strong>{{ stats.response_time }}</strong><span>Response time</span></div>
+        <div><strong>{{ stats.focus }}</strong><span>Engineering posture</span></div>
+        <div><strong>{{ stats.delivery }}</strong><span>Work mode</span></div>
+      </div>
+    </div>
+    <div class="hero-panel reveal">
+      <div class="panel-top"><div class="status-dot"></div><span>Cyber-ctr Control Center</span></div>
+      <div class="panel-card">
+        <div class="panel-label">Live delivery stack</div>
+        <div class="panel-value">Python • PostgreSQL • JavaScript</div>
+      </div>
+      <div class="panel-card alt">
+        <div class="panel-label">Core promise</div>
+        <div class="panel-value">Fast, secure, and elegant web experiences.</div>
+      </div>
+      <div class="panel-metrics">
+        <div><span>Security</span><strong>Hardened</strong></div>
+        <div><span>UI Style</span><strong>Minimal Premium</strong></div>
+        <div><span>Support</span><strong>Remote</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Services</span>
+      <h2>What we do.</h2>
+      <p>We focus on clear architecture, refined design, and dependable engineering.</p>
+    </div>
+    <div class="card-grid">
+      {% for item in services %}
+      <article class="glass-card reveal">
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.desc }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="process" class="section section-alt">
+  <div class="container split-grid">
+    <div class="reveal">
+      <span class="eyebrow">Process</span>
+      <h2>A clean workflow that keeps the product moving.</h2>
+      <p class="muted">Each stage is designed to reduce confusion, improve delivery quality, and keep the user experience premium.</p>
+    </div>
+    <div class="process-list">
+      {% for step, desc in process %}
+      <div class="process-item reveal">
+        <div class="step">{{ loop.index }}</div>
+        <div>
+          <h3>{{ step }}</h3>
+          <p>{{ desc }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section id="work" class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Selected work</span>
+      <h2>Recent projects and tech stack.</h2>
+      <p>Cyber-ctr has built a variety of secure web applications, from SaaS platforms to custom solutions.</p>
+
+    </div>
+    <div class="work-grid">
+      {% for title, desc in showcases %}
+      <article class="work-card reveal">
+        <div class="work-shape"></div>
+        <h3>{{ title }}</h3>
+        <p>{{ desc }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="stack-row reveal">
+      <span class="eyebrow">Tech stack</span>
+      <div class="stack-tags">
+        {% for tech in stack %}
+        <span>{{ tech }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container trust-strip reveal">
+    <div>
+      <span class="eyebrow">Why choose us?</span>
+      <h2>Built for startups that need to move fast without cutting corners.</h2>
+      
+    </div>
+    <div class="trust-points">
+      <span>Responsive by design</span>
+      <span>Database-ready</span>
+      <span>Deployment-friendly</span>
+      <span>Brand-focused</span>
+      <span>Security-hardened</span>
+      <span>Remote support</span>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="container contact-grid">
+    <div class="contact-copy reveal">
+      <span class="eyebrow">Contact</span>
+      <h2>Ready to build the next version of your idea?</h2>
+      <p>Send a brief and Cyber-ctr will respond with a practical path forward.</p>
+      <div class="contact-details">
+        <a href="mailto:thresholdtechnologylimited@gmail.com">thresholdtechnologylimited@gmail.com</a>
+        <a href="https://www.linkedin.com/in/ekenu-steve-845879257" target="_blank" rel="noopener">LinkedIn profile</a>
+        <a href="https://github.com/Cyber-ctr" target="_blank" rel="noopener">GitHub profile</a>
+        <a href="https://youtube.com/@Cyber-ctr" target="_blank" rel="noopener">YouTube channel</a>
+      </div>
+    </div>
+
+    <form class="contact-form glass-card reveal" method="POST" action="{{ url_for('index') }}">
+      {{ form.hidden_tag() }}
+      <label>
+        <span>{{ form.name.label.text }}</span>
+        {{ form.name(class_="field", placeholder="Your name") }}
+        {% for error in form.name.errors %}<small class="error">{{ error }}</small>{% endfor %}
+      </label>
+      <label>
+        <span>{{ form.email.label.text }}</span>
+        {{ form.email(class_="field", placeholder="you@example.com") }}
+        {% for error in form.email.errors %}<small class="error">{{ error }}</small>{% endfor %}
+      </label>
+      <label>
+        <span>{{ form.company.label.text }}</span>
+        {{ form.company(class_="field", placeholder="Optional") }}
+        {% for error in form.company.errors %}<small class="error">{{ error }}</small>{% endfor %}
+      </label>
+      <label>
+        <span>{{ form.message.label.text }}</span>
+        {{ form.message(class_="field textarea", placeholder="Tell us about your project, timeline, and goals.") }}
+        {% for error in form.message.errors %}<small class="error">{{ error }}</small>{% endfor %}
+      </label>
+      {{ form.submit(class_="btn primary full") }}
+    </form>
+  </div>
+</section>
+{% endblock %}

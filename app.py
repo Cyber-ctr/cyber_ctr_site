@@ -56,7 +56,7 @@ class EmptyForm(FlaskForm):
 
 
 def _database_uri():
-    uri = os.getenv("DATABASE_URL", "sqlite:///cyber_ctr.db")
+    uri = os.getenv("DATABASE_URL", "sqlite:///cyber_ctr_v2.db")
     if uri.startswith("postgres://"):
         uri = uri.replace("postgres://", "postgresql://", 1)
     return uri
@@ -70,12 +70,12 @@ def _admin_password_matches(password: str) -> bool:
     pw_hash = os.getenv("ADMIN_PASSWORD_HASH", "").strip()
     if pw_hash:
         return check_password_hash(pw_hash, password)
-    return password == os.getenv("ADMIN_PASSWORD", "change-this-password")
+    return password == os.getenv("ADMIN_PASSWORD", "CyberCtr@2026Secure")
 
 
 def create_app():
     app = Flask(__name__)
-    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "dev-change-this-secret")
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "Thisisamatterofsecrecy!!")
     app.config["SQLALCHEMY_DATABASE_URI"] = _database_uri()
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["WTF_CSRF_TIME_LIMIT"] = None

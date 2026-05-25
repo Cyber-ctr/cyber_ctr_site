@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Messages</span>
+      <h2>All contact submissions</h2>
+    </div>
+
+    <div class="card-grid" style="grid-template-columns: 1fr;">
+      {% for message in messages %}
+        <article class="glass-card">
+          <h3>
+            {{ message.name }}
+            {% if not message.is_read %}
+              <span style="color:#7ef0ff;">• Unread</span>
+            {% endif %}
+          </h3>
+          <p><strong>Email:</strong> {{ message.email }}</p>
+          <p><strong>Company:</strong> {{ message.company or "N/A" }}</p>
+          <p><strong>Submitted:</strong> {{ message.created_at }}</p>
+          <p>{{ message.message }}</p>
+
+          <div style="display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1rem;">
+            {% if not message.is_read %}
+            <form method="POST" action="{{ url_for('admin_mark_read', message_id=message.id) }}">
+              {{ action_form.hidden_tag() }}
+              <button class="btn ghost" type="submit">Mark read</button>
+            </form>
+            {% endif %}
+
+            <form method="POST" action="{{ url_for('admin_delete_message', message_id=message.id) }}">
+              {{ action_form.hidden_tag() }}
+              <button class="btn primary" type="submit">Delete</button>
+            </form>
+          </div>
+        </article>
+      {% else %}
+        <article class="glass-card">
+          <p>No contact messages yet.</p>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

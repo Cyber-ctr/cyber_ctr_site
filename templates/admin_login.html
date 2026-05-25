@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="center-card glass-card" style="max-width: 520px;">
+      <span class="eyebrow">Admin access</span>
+      <h1>Sign in</h1>
+      <form method="POST" class="contact-form">
+        {{ form.hidden_tag() }}
+        <label>
+          <span>{{ form.username.label.text }}</span>
+          {{ form.username(class_="field", placeholder="Admin username") }}
+        </label>
+        <label>
+          <span>{{ form.password.label.text }}</span>
+          {{ form.password(class_="field", placeholder="Admin password") }}
+        </label>
+        {{ form.submit(class_="btn primary full") }}
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

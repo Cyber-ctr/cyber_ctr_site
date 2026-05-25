@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Dashboard</span>
+      <h2>Contact inbox overview</h2>
+    </div>
+
+    <div class="card-grid">
+      <article class="glass-card">
+        <h3>Total messages</h3>
+        <p>{{ total_messages }}</p>
+      </article>
+      <article class="glass-card">
+        <h3>Unread messages</h3>
+        <p>{{ unread_messages }}</p>
+      </article>
+    </div>
+
+    <div style="margin-top: 1.5rem;" class="glass-card">
+      <h3>Recent messages</h3>
+      {% if recent_messages %}
+        {% for message in recent_messages %}
+          <div style="padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.08);">
+            <strong>{{ message.name }}</strong> — {{ message.email }}<br>
+            <small>{{ message.created_at }}</small>
+            <p>{{ message.message[:180] }}{% if message.message|length > 180 %}...{% endif %}</p>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No messages yet.</p>
+      {% endif %}
+      <p style="margin-top: 1rem;">
+        <a class="btn ghost" href="{{ url_for('admin_messages') }}">View all messages</a>
+      </p>
+      <form method="POST" action="{{ url_for('admin_logout') }}">
+        {{ action_form.hidden_tag() }}
+        <button class="btn primary" type="submit">Logout</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
